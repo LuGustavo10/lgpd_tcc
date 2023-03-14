@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="data:;base64,iVBORw0KGgo=">
+    <!-- Firebase SDK -->
+    <script type= "module" src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js"></script>
+    <script type= "module" src="https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js"></script>
+
+    <title>InsertFirebase</title>
+    
+</head>
+<body>
+    <h1>My Project</h1>
+
+    <h3> Insert an User </h3>
+    <!-- Form to insert new data into Firebase -->
+    <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" placeholder="Inform the user name" size="32"><br><br>
+
+        <label for="age">Age:</label><br>
+        <input type="text" id="age" name="age" placeholder="Inform the user age" size="15"><br><br>
+
+        <button id="submit">Submit</button>
+    </form>
+    <!-- Listener responsable to get user data and send the requisition through a submit button -->
+    <script type="module">
+        import { app } from "../Controller/connectFirebase.js";
+        import {addDataToFirestore} from "../Controller/insertFirebase.js";
+
+        const form = document.querySelector('form');
+        const submitBtn = document.querySelector('#submit');
+        
+        submitBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            const name = form.name.value;
+            const age = form.age.value;
+            const data = { name, age };
+            addDataToFirestore(data);
+            form.reset();
+        });
+    </script>
+
+<h3>Search for a User</h3>
+<form id="formSearch" method="post">
+  <label for="search">Search:</label><br>
+  <input type="text" id="search" name="search" placeholder="Search for a user through his name or age" size="32"><br><br>
+  <button id="searchBtn">Search</button>
+</form>
+
+<div id="results"></div>
+
+<script type="module">
+  import { search } from '../Model/search.js';
+
+  const formSearch = document.querySelector('#formSearch');
+  const searchBtn = document.querySelector('#searchBtn');
+  const results = document.querySelector('#results');
+
+  searchBtn.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const searchTerm = formSearch.search.value;
+    const data = await search(searchTerm);
+    if (data.length > 0) {
+      const table = document.createElement('table');
+      const headers = ['Name', 'Age'];
+      const headerRow = document.createElement('tr');
+      headers.forEach(header => {
+        const th = document.createElement('th');
+        th.textContent = header;
+        headerRow.appendChild(th);
+      });
+      table.appendChild(headerRow);
+      data.forEach(item => {
+        const tr = document.createElement('tr');
+        const tdName = document.createElement('td');
+        tdName.textContent = item.name;
+        const tdAge = document.createElement('td');
+        tdAge.textContent = item.age;
+        tr.appendChild(tdName);
+        tr.appendChild(tdAge);
+        table.appendChild(tr);
+        
+        // Create edit button for each user
+        // Inside the `data.forEach` loop in the search button event listener
+        const tdEdit = document.createElement('td');
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit Data';
+        editBtn.addEventListener('click', () => {
+          window.open(`edit.html?id=${item.id}&name=${item.name}&age=${item.age}`, 'Edit User Data', 'height=400,width=400');
+        });
+        tdEdit.appendChild(editBtn);
+        tr.appendChild(tdEdit);
+
+      });
+      results.innerHTML = '';
+      results.appendChild(table);
+    } else {
+      results.innerHTML = 'No results found';
+    }
+  });
+</script>
+</body>  
+</html>
