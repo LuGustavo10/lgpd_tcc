@@ -1,0 +1,123 @@
+  body{
+  font-family: 'Anonymous Pro', monospace;
+}
+
+  #imagemcenter{
+    user-select: none;
+  }
+
+/* Estilo para div do formulário */
+  .login-form {
+    background-color: #fff;
+    padding: 20px;
+    width: 45%;
+    position: fixed;
+    left: 27.5%;
+  }
+  
+  .login-form .form-outline {
+    margin-bottom: 0;
+  }
+  
+  .login-form button[type="submit"] {
+    margin-top: 20px;
+  }
+  
+  .login-form .divider {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .login-form .divider:before,
+  .login-form .divider:after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+  }
+  
+  /* Estilo para div da imagem */
+  .login-image {
+    background-color: #f8f9fa;
+    width: 45%;
+    position: fixed;
+    left: 2.5%;
+    top: 15%;
+  }
+  
+  .login-image img {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* Estilo para label do formulário */
+  .form-label {
+    font-size: 1rem;
+    top: -1.5rem;
+  }
+  
+  /* Estilo para link 'Esqueceu a senha?' */
+  a[href="#!"] {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a[href="#!"]:hover {
+    text-decoration: underline;
+  }
+
+  .btn-animated {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #007bff;
+    color: #fff;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .btn-animated:hover {
+    background-color: #dc3545;
+  }
+  
+  .btn-animated .btn-text {
+    position: relative;
+    z-index: 2;
+  }
+
+  .custom-btn {
+    background-color: #fff;
+    color: #000;
+    border: 0;
+  }
+  
+  .custom-btn:hover {
+    border: 1px solid #000;
+    background-color: #ccc;
+  }
+  
+  
+  .btn.custom-btn {
+    border: 1px solid black;
+  }
+  
+  .password-eye {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 2;
+  }
+  
+
+  

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="data:;base64,iVBORw0KGgo=">
+    <title>Login - LGPD</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous+Pro&display=swap">
+</head>
+<body> <!--Label's atualizadas - Integrei os itens com suas respectivas label's-->
+  <section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-8 col-lg-7 col-xl-6 mb-5 text-center" id="imagemcenter">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image">
+        </div>
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center mb-5">
+                <h2 class="card-title">LGPD</h2>
+              </div>
+              <form>
+                <!-- Email input -->
+                <label for="email">Email:</label> <!-- 1 label-->
+                <div class="form-outline mb-4">
+                  <input type="email" id="email" class="form-control form-control-lg" placeholder="Digite seu email" />
+                </div>
+      
+                <!-- Password input -->
+                <label for="pass">Senha:</label> <!-- 2 label-->
+                <div class="form-outline mb-4 position-relative">
+                  <input type="password" id="pass" class="form-control form-control-lg" placeholder="Digite sua senha" />
+                  <label class="form-label" for="pass"><span  class="password-eye bi bi-lock password-eye position-absolute top-50" onclick="togglePassword('pass', this)"  style="top: 25px;">
+                    <img class="password-img" src="https://img.icons8.com/material-outlined/24/000000/lock.png" alt="Mostrar/Ocultar Senha" width="24" height="24">
+                  </span> </label>
+                                       
+                </div>
+  
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <!-- Checkbox -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                    <label class="form-check-label" for="form1Example3">Lembrar de mim</label> <!-- 3 label-->
+                  </div>
+                  <a href="#!">Esqueceu a senha?</a>
+                </div>
+  
+                <!-- Submit button -->
+                <button type="submit" id="submit" class="btn btn-primary btn-lg btn-block btn-animated">
+                  <span class="btn-text">Acessar</span>
+                </button>  
+                    
+                    <script type="module">
+                      import { validateUserData } from '../../../Model/validate.js';
+                    
+                      const form = document.querySelector('form');
+                      form.addEventListener('submit', async (event) => {
+                        event.preventDefault();
+                        const email = document.querySelector('#email').value;
+                        const password = document.querySelector('#pass').value;
+                        const userId = await validateUserData(email, password);
+                        if (userId) {
+                          // Redirect to success page
+                          window.location.href = '../../index.html';
+                        } else {
+                          alert('Email ou senha inválidos.');
+                        }
+                      });
+                      // const form = document.querySelector('form');
+                      // form.addEventListener('submit', (event) => {
+                      //   event.preventDefault();
+                      //   validateUserData();
+                      // });
+                    </script>                                                                
+      
+                    <div class="divider d-flex justify-content-center align-items-center my-4 text-center">
+                      <hr class="border-muted flex-grow-1 mx-3">
+                        <p class="fw-bold mx-3 mb-0 text-muted">OU</p>
+                      <hr class="border-muted flex-grow-1 mx-3">
+                    </div>
+
+                    <button type="submit" class="btn btn-lg btn-block custom-btn shadow-btn">
+                      <img src="../../imgs/login/google-login.png" alt="Logo do Google" style="width: 20px; height: 20px; margin-right: 10px;">
+                      Logar com Google
+                    </button>                                                            
+                    <br>
+                    Não possui conta? <a href="../../registro/html/registro.html" class="mt-3"><b>Cadastre-se por aqui!</b></a>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script src="../../../Model/login.js"></script>
+</body>
+</html>
